@@ -105,16 +105,19 @@
     (setq rclist (cdr rclist))
     
     )
-
+  
   ;;; Create buffer
   (setq temp-buffer-setup-hook 'org-mode)
-  (with-output-to-temp-buffer "*segments*" 
-  
+  (with-output-to-temp-buffer "*segments*"
+
+  ;;; Print total number of articles in list
+  (princ (format "Total articles categorized: %d\n" (length itemlist)))
   
   ;;; Insert hashes
   (maphash
    (lambda (k v)
-     (princ (format "* %s\n" k))
+     
+     (princ (format "* %s : total = %d\n" k (length v)))
      (setq vlist v)
      (while vlist
        (princ (format "%s\n" (pop vlist)))
